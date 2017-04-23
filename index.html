@@ -6,40 +6,315 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-    <div id="container">
-        <button onclick="search()"> hello</button>
+    <!-- <div id="input">
+        search: <input type="text" id="search-term">
     </div>
+    <div id="search">
+        <button onclick="search()"> hello</button>
+        <table id="results-table">
+            <thead>
+                <tr>
+                    <th>Web URL</th>
+                    <th>Headline</th>
+                    <th>Lead Paragraph</th>
+                    <th>Thumbnail</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>www.newyorktimes.com</td>
+                    <td>alina rox</td>
+                    <td>born in 1995, amazing</td>
+                    <td><img src="https://static01.nyt.com/images/2017/04/23/us/23Trumptax-1/00trumptax1-thumbStandard.jpg"></img></td>
+                </tr>
+            </tbody>
+        </table>
+    </div> -->
+
+    <div class="tab">
+        <button class="tablinks" onclick="openTab(event, 'top-stories')">Top Stories</button>
+        <button class="tablinks" onclick="openTab(event, 'most-popular')">Most Popular</button>
+        <button class="tablinks" onclick="openTab(event, 'archive-search')">Archive Search</button>
+    </div>
+
+    <div id="top-stories" class="tabcontent">
+        <div id="results-top-stories">
+            <h2>Top Stories</h2>
+            <button onclick="loadTopStories()"> hello</button>
+            <table id="results-table">
+                <thead>
+                    <tr>
+                        <th>Web URL</th>
+                        <th>Headline</th>
+                        <th>Lead Paragraph</th>
+                        <!-- <th>Thumbnail</th> -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>www.newyorktimes.com</td>
+                        <td>alina rox</td>
+                        <td>born in 1995, amazing</td>
+                        <!-- <td><img src="https://static01.nyt.com/images/2017/04/23/us/23Trumptax-1/00trumptax1-thumbStandard.jpg"></img></td> -->
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="most-popular" class="tabcontent">
+        <div id="results-most-popular">
+            <h2>Most Popular</h2>
+            <button onclick="loadMostPopular()"> hello</button>
+            <table id="results-table">
+                <thead>
+                    <tr>
+                        <th>Web URL</th>
+                        <th>Headline</th>
+                        <th>Lead Paragraph</th>
+                        <th>Thumbnail</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>www.newyorktimes.com</td>
+                        <td>alina rox</td>
+                        <td>born in 1995, amazing</td>
+                        <td><img src="https://static01.nyt.com/images/2017/04/23/us/23Trumptax-1/00trumptax1-thumbStandard.jpg"></img></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="archive-search" class="tabcontent">
+        
+        <div id="results-archive-search">
+            <h2>Archive Search</h2>
+            <div id="input">
+            search: <input type="text" id="search-term">
+            <button onclick="loadArchiveSearch()"> hello</button>
+        </div>
+            
+            <table id="results-table">
+                <thead>
+                    <tr>
+                        <th>Web URL</th>
+                        <th>Headline</th>
+                        <th>Lead Paragraph</th>
+                        <th>Thumbnail</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>www.newyorktimes.com</td>
+                        <td>alina rox</td>
+                        <td>born in 1995, amazing</td>
+                        <td><img src="https://static01.nyt.com/images/2017/04/23/us/23Trumptax-1/00trumptax1-thumbStandard.jpg"></img></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
     <!-- <script src="functions.js"></script> -->
     <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script>
-    function myCallback(json){
-        console.log('hello');
+    function myCallbackTopStories(json){
+        console.log('sup');
+        //console.log(json.response.docs[0].web_url);
+        //console.log(json.response.docs.length); 
 
-        console.log(json.response.docs[0].web_url);
+        var output = '';
+        var first = 0;
+
+        //var length = json.response.docs.length;
+        for(var i = 0; i < json.results.length; i++){
+            /*
+            output += '<tr>';
+            output += '<td>' + json.response.docs[i].web_url + '</td>';
+            output += '<td>' + json.response.docs[i].headline.main + '</td>';
+            output += '<td>' + json.response.docs[i].lead_paragraph + '</td>';
+            output += '</tr>';
+            output += '<br>';*/
+            output += '<tr>';
+            output += '<td>' + json.results[i].short_url + '</td>';
+            output += '<td>' + json.results[i].title + '</td>';
+            output += '<td>' + json.results[i].abstract + '</td>';
+            //output += '<td>' + json.results[i].multimedia[first].url + '</td>';
+            output += '</tr>';
+            output += '<br>';
+        }
+
+        document.querySelector('#results-top-stories #results-table tbody').innerHTML = output;
     }
 
-    function search(){
-        var searchTerm = "travel";
+    function myCallbackMostPopular(json){
+        console.log('sup');
+        //console.log(json.response.docs[0].web_url);
+        //console.log(json.response.docs.length); 
 
-        var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
-        url += '?' + 'api-key=911f2d3a5aa54d86a4e3a6eff4765176' + '&' +    'fq=' +searchTerm;
+        var output = '';
+        var first = 0;
+
+        //var length = json.response.docs.length;
+        for(var i = 0; i < json.results.length; i++){
+            /*
+            output += '<tr>';
+            output += '<td>' + json.response.docs[i].web_url + '</td>';
+            output += '<td>' + json.response.docs[i].headline.main + '</td>';
+            output += '<td>' + json.response.docs[i].lead_paragraph + '</td>';
+            output += '</tr>';
+            output += '<br>';*/
+            output += '<tr>';
+            output += '<td>' + json.results[i].url + '</td>';
+            output += '<td>' + json.results[i].title + '</td>';
+            output += '<td>' + json.results[i].abstract + '</td>';
+            //output += '<td>' + json.results[i].multimedia[first].url + '</td>';
+            output += '</tr>';
+            output += '<br>';
+        }
+
+        document.querySelector('#results-most-popular #results-table tbody').innerHTML = output;
+    }
+
+    function myCallbackArchiveSearch(json){
+        console.log('sup');
+        //console.log(json.response.docs[0].web_url);
+        //console.log(json.response.docs.length); 
+
+        var output = '';
+        var first = 0;
+
+        //var length = json.response.docs.length;
+        for(var i = 0; i < json.response.docs.length; i++){
+            
+            output += '<tr>';
+            output += '<td>' + json.response.docs[i].web_url + '</td>';
+            output += '<td>' + json.response.docs[i].headline.main + '</td>';
+            output += '<td>' + json.response.docs[i].lead_paragraph + '</td>';
+            output += '</tr>';
+            output += '<br>';
+        }
+
+        document.querySelector('#results-archive-search #results-table tbody').innerHTML = output;
+    }    
+
+    // function search(){
+    //     var searchTerm = document.querySelector('#search-term').value;
+    //     searchTerm = searchTerm.trim();
+
+    //     if(searchTerm == "") alert('please enter a search term!');
+
+    //     // var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
+    //     // url += '?' + 'api-key=911f2d3a5aa54d86a4e3a6eff4765176' + '&' +    'fq=' +searchTerm;
+
+    //     var url = "https://api.nytimes.com/svc/topstories/v2/home.json";
+    //     url += "?" + "api-key=911f2d3a5aa54d86a4e3a6eff4765176";
+
+        
+
+    //     $.ajax({
+    //         url: url,
+    //         method: 'GET',
+    //     }).done(function(result) {
+    //         console.log('suck it');
+            
+    //         console.log(result);
+    //         myCallback(result); 
+    //     }).fail(function(err) {
+    //         throw err;
+    //     });
+    // };
+
+    function loadTopStories(){
+        var url = "https://api.nytimes.com/svc/topstories/v2/home.json";
+        url += "?" + "api-key=911f2d3a5aa54d86a4e3a6eff4765176";
 
         $.ajax({
             url: url,
             method: 'GET',
         }).done(function(result) {
             console.log('suck it');
+            
             console.log(result);
+            myCallbackTopStories(result); 
         }).fail(function(err) {
             throw err;
         });
-    };
+    }
+
+    function loadMostPopular(){
+        var url = "https://api.nytimes.com/svc/mostpopular/v2/mostemailed/all-sections/7.json";
+        url += '?' + 'api-key=911f2d3a5aa54d86a4e3a6eff4765176';
+        
+        $.ajax({
+          url: url,
+          method: 'GET',
+        }).done(function(result) {
+          console.log(result);
+          myCallbackMostPopular(result);
+        }).fail(function(err) {
+          throw err;
+        });
+    }
+
+    function loadArchiveSearch(){
+        var searchTerm = document.querySelector('#search-term').value;
+        searchTerm = searchTerm.trim();
+
+        if(searchTerm == ''){
+            searchTerm = "politics";
+            console.log('term is in quotes');
+        }   
+
+        searchTerm.toString();
+
+        var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
+        url += "?" + 
+          "api-key=911f2d3a5aa54d86a4e3a6eff4765176"+ "&fq=";
+        url += searchTerm;
+        
+        $.ajax({
+          url: url,
+          method: 'GET',
+        }).done(function(result) {
+          console.log(result);
+          myCallbackArchiveSearch(result);
+        }).fail(function(err) {
+          throw err;
+        });
+    }
+
+    function openTab(evt, searchMethod) {
+        // Declare all variables
+        var i, tabcontent, tablinks;
+
+        // Get all elements with class="tabcontent" and hide them
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+
+        // Get all elements with class="tablinks" and remove the class "active"
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+
+        // Show the current tab, and add an "active" class to the button that opened the tab
+        document.getElementById(searchMethod).style.display = "block";
+        if(searchMethod == "top-stories") loadTopStories();
+        else if(searchMethod == "most-popular") loadMostPopular();
+        else if(searchMethod == "archive-search") loadArchiveSearch();
+        else loadTopStories();
+
+        //FIX THIS I THINK!
+        evt.currentTarget.className += " active";
+    }
 
 
-
-
-
-</script>
+  </script>
 
 </body>
 </html>
