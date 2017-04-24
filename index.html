@@ -31,6 +31,12 @@
         </table>
     </div> -->
 
+    <div id="test">
+        <span desc="5400+ latest Free jQuery plugins with examples and tutorials for web &amp; mobile developers.">
+          jQueryScript
+        </span>
+    </div>
+
     <div class="tab">
         <button class="tablinks" onclick="openTab(event, 'top-stories')">Top Stories</button>
         <button class="tablinks" onclick="openTab(event, 'most-popular')">Most Popular</button>
@@ -118,6 +124,7 @@
     </div>
 
     <!-- <script src="functions.js"></script> -->
+    <script src="marginotes.js"></script>
     <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script>
     function myCallbackTopStories(json){
@@ -313,7 +320,7 @@
         evt.currentTarget.className += " active";
     }
 
-
+    $("span").marginotes();
   </script>
 
 </body>
