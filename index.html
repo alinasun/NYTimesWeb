@@ -3,75 +3,48 @@
 <head>
     <meta charset="utf-8">
     <title>Annotated News</title>
+    <link href='http://fonts.googleapis.com/css?family=Loved by the King' rel='stylesheet'>
+    <link href='http://fonts.googleapis.com/css?family=Overlock' rel='stylesheet'>
     <link rel="stylesheet" type="text/css" href="style.css">
-    <style>
-        body{
-            margin-left: 50px;
-        }
-    </style>
+    
 </head>
 <body>
-    <!-- <div id="input">
-        search: <input type="text" id="search-term">
-    </div>
-    <div id="search">
-        <button onclick="search()"> hello</button>
-        <table id="results-table">
-            <thead>
-                <tr>
-                    <th>Web URL</th>
-                    <th>Headline</th>
-                    <th>Lead Paragraph</th>
-                    <th>Thumbnail</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>www.newyorktimes.com</td>
-                    <td>alina rox</td>
-                    <td>born in 1995, amazing</td>
-                    <td><img src="https://static01.nyt.com/images/2017/04/23/us/23Trumptax-1/00trumptax1-thumbStandard.jpg"></img></td>
-                </tr>
-            </tbody>
-        </table>
-    </div> -->
+        <div id="header">
+            <a href="index.html" >
+                ANOTHER NY TIMES
+            </a>
+        </div>
 
-    <div id="test">
-        <span desc="5400+ latest Free jQuery plugins with examples and tutorials for web &amp; mobile developers." style="border-bottom: 1px dashed rgb(51, 122, 183); cursor: help;">jQueryScript</span>
-        <a href="http://www.jqueryscript.net" desc="5400+ latest Free jQuery plugins with examples and tutorials for web &amp; mobile developers.">jQueryScript.Net</a>
-        <br>
+
+<div id="outercontainer">
+    <div class="tab">
+
+        <button class="tablinks" onclick="openTab(event, 'top-stories')">TOP STORIES</button>
+        <button class="tablinks" onclick="openTab(event, 'most-popular')">MOST POPULAR</button>
+        <button class="tablinks" onclick="openTab(event, 'archive-search')">ARCHIVE SEARCH</button>
     </div>
+    <hr>
 
     <div id="add-margin-notes">
-        <button onclick="getSelectionText()">Add Margin Note</button>
+        <br>
+        <input type="text" id="margin-note-input"></input>
+        <button onclick="addMarginNote()">Add Margin Note</button>
     </div>
 
-    <div class="tab">
-        <br>
-        <button class="tablinks" onclick="openTab(event, 'top-stories')">Top Stories</button>
-        <button class="tablinks" onclick="openTab(event, 'most-popular')">Most Popular</button>
-        <button class="tablinks" onclick="openTab(event, 'archive-search')">Archive Search</button>
-    </div>
 
     <div id="top-stories" class="tabcontent">
         <div id="results-top-stories">
             <h2>Top Stories</h2>
-            <button onclick="loadTopStories()"> hello</button>
             <table id="results-table">
                 <thead>
                     <tr>
-                        <th>Web URL</th>
                         <th>Headline</th>
                         <th>Lead Paragraph</th>
-                        <!-- <th>Thumbnail</th> -->
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>www.newyorktimes.com</td>
-                        <td>alina rox</td>
-                        <td>born in 1995, amazing</td>
-                        <!-- <td><img src="https://static01.nyt.com/images/2017/04/23/us/23Trumptax-1/00trumptax1-thumbStandard.jpg"></img></td> -->
+
                     </tr>
                 </tbody>
             </table>
@@ -81,22 +54,16 @@
     <div id="most-popular" class="tabcontent">
         <div id="results-most-popular">
             <h2>Most Popular</h2>
-            <button onclick="loadMostPopular()"> hello</button>
             <table id="results-table">
                 <thead>
                     <tr>
-                        <th>Web URL</th>
                         <th>Headline</th>
                         <th>Lead Paragraph</th>
-                        <th>Thumbnail</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>www.newyorktimes.com</td>
-                        <td>alina rox</td>
-                        <td>born in 1995, amazing</td>
-                        <td><img src="https://static01.nyt.com/images/2017/04/23/us/23Trumptax-1/00trumptax1-thumbStandard.jpg"></img></td>
+   
                     </tr>
                 </tbody>
             </table>
@@ -109,261 +76,31 @@
             <h2>Archive Search</h2>
             <div id="input">
             search: <input type="text" id="search-term">
-            <button onclick="loadArchiveSearch()"> hello</button>
+            <button onclick="loadArchiveSearch()"> search</button>
         </div>
             
             <table id="results-table">
                 <thead>
                     <tr>
-                        <th>Web URL</th>
                         <th>Headline</th>
                         <th>Lead Paragraph</th>
-                        <th>Thumbnail</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>www.newyorktimes.com</td>
-                        <td>alina rox</td>
-                        <td>born in 1995, amazing</td>
-                        <td><img src="https://static01.nyt.com/images/2017/04/23/us/23Trumptax-1/00trumptax1-thumbStandard.jpg"></img></td>
+
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
 
-    <!-- <script src="functions.js"></script> -->
+</div>
     
     <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="marginotes.js"></script>
-    <script>
-    function myCallbackTopStories(json){
-        console.log('sup');
-        //console.log(json.response.docs[0].web_url);
-        //console.log(json.response.docs.length); 
-
-        var output = '';
-        var first = 0;
-
-        //var length = json.response.docs.length;
-        for(var i = 0; i < json.results.length; i++){
-            /*
-            output += '<tr>';
-            output += '<td>' + json.response.docs[i].web_url + '</td>';
-            output += '<td>' + json.response.docs[i].headline.main + '</td>';
-            output += '<td>' + json.response.docs[i].lead_paragraph + '</td>';
-            output += '</tr>';
-            output += '<br>';*/
-            output += '<tr>';
-            output += '<td>' + json.results[i].short_url + '</td>';
-            output += '<td>' + json.results[i].title + '</td>';
-            output += '<td>' + json.results[i].abstract + '</td>';
-            //output += '<td>' + json.results[i].multimedia[first].url + '</td>';
-            output += '</tr>';
-            output += '<br>';
-        }
-
-        document.querySelector('#results-top-stories #results-table tbody').innerHTML = output;
-    }
-
-    function myCallbackMostPopular(json){
-        console.log('sup');
-        //console.log(json.response.docs[0].web_url);
-        //console.log(json.response.docs.length); 
-
-        var output = '';
-        var first = 0;
-
-        //var length = json.response.docs.length;
-        for(var i = 0; i < json.results.length; i++){
-            /*
-            output += '<tr>';
-            output += '<td>' + json.response.docs[i].web_url + '</td>';
-            output += '<td>' + json.response.docs[i].headline.main + '</td>';
-            output += '<td>' + json.response.docs[i].lead_paragraph + '</td>';
-            output += '</tr>';
-            output += '<br>';*/
-            output += '<tr>';
-            output += '<td>' + json.results[i].url + '</td>';
-            output += '<td>' + json.results[i].title + '</td>';
-            output += '<td>' + json.results[i].abstract + '</td>';
-            //output += '<td>' + json.results[i].multimedia[first].url + '</td>';
-            output += '</tr>';
-            output += '<br>';
-        }
-
-        document.querySelector('#results-most-popular #results-table tbody').innerHTML = output;
-    }
-
-    function myCallbackArchiveSearch(json){
-        console.log('sup');
-        //console.log(json.response.docs[0].web_url);
-        //console.log(json.response.docs.length); 
-
-        var output = '';
-        var first = 0;
-
-        //var length = json.response.docs.length;
-        for(var i = 0; i < json.response.docs.length; i++){
-            
-            output += '<tr>';
-            output += '<td>' + json.response.docs[i].web_url + '</td>';
-            output += '<td>' + json.response.docs[i].headline.main + '</td>';
-            output += '<td>' + json.response.docs[i].lead_paragraph + '</td>';
-            output += '</tr>';
-            output += '<br>';
-        }
-
-        document.querySelector('#results-archive-search #results-table tbody').innerHTML = output;
-    }    
-
-    // function search(){
-    //     var searchTerm = document.querySelector('#search-term').value;
-    //     searchTerm = searchTerm.trim();
-
-    //     if(searchTerm == "") alert('please enter a search term!');
-
-    //     // var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
-    //     // url += '?' + 'api-key=911f2d3a5aa54d86a4e3a6eff4765176' + '&' +    'fq=' +searchTerm;
-
-    //     var url = "https://api.nytimes.com/svc/topstories/v2/home.json";
-    //     url += "?" + "api-key=911f2d3a5aa54d86a4e3a6eff4765176";
-
-        
-
-    //     $.ajax({
-    //         url: url,
-    //         method: 'GET',
-    //     }).done(function(result) {
-    //         console.log('suck it');
-            
-    //         console.log(result);
-    //         myCallback(result); 
-    //     }).fail(function(err) {
-    //         throw err;
-    //     });
-    // };
-
-
-
-    //$("a,span").marginotes();
-
-    $("a,span").marginotes({
-      // width of the marginal note
-      width: 100,
-      // default attribute to hold the marginal note
-      field: 'desc'
-    });
-
-
-    function loadTopStories(){
-        var url = "https://api.nytimes.com/svc/topstories/v2/home.json";
-        url += "?" + "api-key=911f2d3a5aa54d86a4e3a6eff4765176";
-
-        $.ajax({
-            url: url,
-            method: 'GET',
-        }).done(function(result) {
-            console.log('suck it');
-            
-            console.log(result);
-            myCallbackTopStories(result); 
-        }).fail(function(err) {
-            throw err;
-        });
-    }
-
-    function loadMostPopular(){
-        var url = "https://api.nytimes.com/svc/mostpopular/v2/mostemailed/all-sections/7.json";
-        url += '?' + 'api-key=911f2d3a5aa54d86a4e3a6eff4765176';
-        
-        $.ajax({
-          url: url,
-          method: 'GET',
-        }).done(function(result) {
-          console.log(result);
-          myCallbackMostPopular(result);
-        }).fail(function(err) {
-          throw err;
-        });
-    }
-
-    function loadArchiveSearch(){
-        var searchTerm = document.querySelector('#search-term').value;
-        searchTerm = searchTerm.trim();
-
-        if(searchTerm == ''){
-            searchTerm = "politics";
-            console.log('term is in quotes');
-        }   
-
-        searchTerm.toString();
-
-        var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
-        url += "?" + 
-          "api-key=911f2d3a5aa54d86a4e3a6eff4765176"+ "&fq=";
-        url += searchTerm;
-        
-        $.ajax({
-          url: url,
-          method: 'GET',
-        }).done(function(result) {
-          console.log(result);
-          myCallbackArchiveSearch(result);
-        }).fail(function(err) {
-          throw err;
-        });
-    }
-
-    function openTab(evt, searchMethod) {
-        // Declare all variables
-        var i, tabcontent, tablinks;
-
-        // Get all elements with class="tabcontent" and hide them
-        tabcontent = document.getElementsByClassName("tabcontent");
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-        }
-
-        // Get all elements with class="tablinks" and remove the class "active"
-        tablinks = document.getElementsByClassName("tablinks");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" active", "");
-        }
-
-        // Show the current tab, and add an "active" class to the button that opened the tab
-        document.getElementById(searchMethod).style.display = "block";
-        if(searchMethod == "top-stories") loadTopStories();
-        else if(searchMethod == "most-popular") loadMostPopular();
-        else if(searchMethod == "archive-search") loadArchiveSearch();
-        else loadTopStories();
-
-        //FIX THIS I THINK!
-        evt.currentTarget.className += " active";
-    }
-
-    function getSelectionText() {
-        var text = "";
-        var activeEl = document.activeElement;
-        var activeElTagName = activeEl ? activeEl.tagName.toLowerCase() : null;
-        if (
-          (activeElTagName == "textarea") || (activeElTagName == "input" &&
-          /^(?:text|search|password|tel|url)$/i.test(activeEl.type)) &&
-          (typeof activeEl.selectionStart == "number")
-        ) {
-            text = activeEl.value.slice(activeEl.selectionStart, activeEl.selectionEnd);
-        } else if (window.getSelection) {
-            text = window.getSelection().toString();
-        }
-
-        console.log('getSelectionText: ');
-        console.log(text);
-        return text;
-    }
-    
-  </script>
-
+    <script src="functions.js"></script>
+     
 </body>
 </html>
 

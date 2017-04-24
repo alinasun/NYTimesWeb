@@ -1,0 +1,76 @@
+.img{
+    height:150px;
+}
+
+#header{
+    text-align: center;
+    height:50px;
+    width:800px;
+    font-size:50px;
+    font-family: 'Loved by the King';
+    font-weight: bolder;
+    margin:auto;
+
+}
+body, button{
+    font-family: 'Overlock';
+}
+
+#header a{
+    text-decoration: none;  
+    color:black; 
+}
+#header a:visited{
+    text-decoration: none;  
+    color:black; 
+}
+
+
+    #search-box button{
+            margin: 10px 0px;
+        }
+        #search-results, #results-table{
+            margin-top: 20px;
+        }
+        table, thead, tbody, tr, td, th{
+            border: 1px solid #CCC;
+            border-collapse: collapse;
+            text-align: center;
+        }
+        th, td {
+            padding: 10px;
+        }
+
+#outercontainer {
+    width:1200px;
+    margin:auto;
+}
+.tab {
+    margin:auto;
+    text-align: center;
+    background-color: white; 
+    height: 50px;
+    width: 100%;
+    font-size: 2.7em;
+
+  }
+
+ .tab button{
+    width:120px;
+    height:40px;
+    background-color: steelblue;
+    border-radius: 5px;
+    border-color:none;
+    border:none;
+    font-weight:bold;
+    color:white;
+ }
+
+
+  .tab button:hover {
+    background-color: #a6a6a6;
+  }
+  hr{
+    height:2px;
+    background-color: black;
+  }
