@@ -34,5 +34,5 @@ var marginotes = function (options) {
   })
 }
 
-//window.jQuery.prototype.marginotes = window.$.prototype.marginotes = marginotes
-window.$.prototype.marginotes = marginotes
+window.jQuery.prototype.marginotes = window.$.prototype.marginotes = marginotes;
+
