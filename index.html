@@ -53,7 +53,6 @@
             <table id="results-table">
                 <thead>
                     <tr>
-                        <th>Web URL</th>
                         <th>Headline</th>
                         <th>Lead Paragraph</th>
                         <!-- <th>Thumbnail</th> -->
@@ -61,7 +60,6 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>www.newyorktimes.com</td>
                         <td>alina rox</td>
                         <td>born in 1995, amazing</td>
                         <!-- <td><img src="https://static01.nyt.com/images/2017/04/23/us/23Trumptax-1/00trumptax1-thumbStandard.jpg"></img></td> -->
@@ -78,15 +76,13 @@
             <table id="results-table">
                 <thead>
                     <tr>
-                        <th>Web URL</th>
                         <th>Headline</th>
                         <th>Lead Paragraph</th>
-                        <th>Thumbnail</th>
+                        <!-- <th>Thumbnail</th> -->
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>www.newyorktimes.com</td>
                         <td>alina rox</td>
                         <td>born in 1995, amazing</td>
                         <td><img src="https://static01.nyt.com/images/2017/04/23/us/23Trumptax-1/00trumptax1-thumbStandard.jpg"></img></td>
@@ -108,15 +104,13 @@
             <table id="results-table">
                 <thead>
                     <tr>
-                        <th>Web URL</th>
                         <th>Headline</th>
                         <th>Lead Paragraph</th>
-                        <th>Thumbnail</th>
+                        <!-- <th>Thumbnail</th> -->
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>www.newyorktimes.com</td>
                         <td>alina rox</td>
                         <td>born in 1995, amazing</td>
                         <td><img src="https://static01.nyt.com/images/2017/04/23/us/23Trumptax-1/00trumptax1-thumbStandard.jpg"></img></td>
@@ -130,7 +124,6 @@
 
     <!-- <script src="functions.js"></script> -->
     <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
-    <script src="marginotes.js"></script>
 
     <script>
     function myCallbackTopStories(json){
@@ -151,10 +144,10 @@
             output += '</tr>';
             output += '<br>';*/
             output += '<tr>';
-            output += '<td>' + json.results[i].short_url + '</td>';
-            output += '<td>' + json.results[i].title + '</td>';
+            // output += '<td>' + json.results[i].short_url + '</td>';
+            output += '<td><a href="' + json.results[i].short_url + '">' + json.results[i].title + '</a><br><img class="img" src="' + json.results[i].multimedia[2].url + '"></td>';
             output += '<td>' + json.results[i].abstract + '</td>';
-            //output += '<td>' + json.results[i].multimedia[first].url + '</td>';
+            // output += '<td> +  + '"></td>';
             output += '</tr>';
             output += '<br>';
         }
@@ -180,10 +173,10 @@
             output += '</tr>';
             output += '<br>';*/
             output += '<tr>';
-            output += '<td>' + json.results[i].url + '</td>';
-            output += '<td>' + json.results[i].title + '</td>';
+            // output += '<td>' + json.results[i].url + '</td>';
+            output += '<td><a href="' + json.results[i].short_url + '">' + json.results[i].title + '</a></td>';
             output += '<td>' + json.results[i].abstract + '</td>';
-            //output += '<td>' + json.results[i].multimedia[first].url + '</td>';
+            // output += '<td>' + json.results[i].multimedia[first].url + '</td>';
             output += '</tr>';
             output += '<br>';
         }
@@ -203,8 +196,8 @@
         for(var i = 0; i < json.response.docs.length; i++){
             
             output += '<tr>';
-            output += '<td>' + json.response.docs[i].web_url + '</td>';
-            output += '<td>' + json.response.docs[i].headline.main + '</td>';
+            // output += '<td>' + json.response.docs[i].web_url + '</td>';
+            output += '<td><a href="' + json.response.docs[i].web_url + '">' + json.response.docs[i].headline.main + '</a></td>';
             output += '<td>' + json.response.docs[i].lead_paragraph + '</td>';
             output += '</tr>';
             output += '<br>';
